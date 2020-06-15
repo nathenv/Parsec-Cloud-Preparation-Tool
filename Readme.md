@@ -36,7 +36,7 @@ Then fill in the details on the next page.
 4. Copy the below code and follow the instructions in the script - you'll see them in RED
 
 ```
-[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"  
+[Net.ServicePointManager]::SecurityProtocol = "tls13, tls12, tls11"  
 (New-Object System.Net.WebClient).DownloadFile("https://github.com/nathenv/Parsec-Cloud-Preparation-Tool/archive/master.zip","$ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool.zip")  
 New-Item -Path $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool -ItemType Directory  
 Expand-Archive $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool.Zip -DestinationPath $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool  
@@ -50,15 +50,8 @@ This tool supports:
 Windows 10 (Azure)
                     
 ### CLOUD SKU:
-AWS G3.4xLarge    (Tesla M60)  
-AWS G2.2xLarge    (GRID K520)  
-AWS G4dn.xLarge   (Tesla T4 with vGaming driver)  
 Azure NV6         (Tesla M60)  
-Paperspace P4000  (Quadro P4000)  
-Paperspace P5000  (Quadro P5000)  
-Google P100 VW    (Tesla P100 with Virtual Workstation Driver)  
-Google P4 VW      (Tesla P4 with Virtual Workstation Driver)  
-Google T4 VW      (Tesla T4 with Virtual Workstation Driver)  
+
 
 ### RDP:  
 Only use RDP to intially setup the instance. Parsec and RDP are not friendly with each other.  
