@@ -398,7 +398,7 @@ $n +=2
 else{write-output "Not Required"}
 }
 
-#Adds Premade Group Policu Item if existing configuration doesn't exist
+#Adds Premade Group Policy Item if existing configuration doesn't exist
 function addRegItems{
 ProgressWriter -Status "Adding Registry Items and Group Policy" -PercentComplete $PercentComplete
 if (Test-Path ("C:\Windows\system32\GroupPolicy" + "\gpt.ini")) 
@@ -465,7 +465,7 @@ ProgressWriter -Status "Downloading Parsec" -PercentComplete $PercentComplete
 ProgressWriter -Status "Downloading GPU Updater" -PercentComplete $PercentComplete
 (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/parsec+desktop.png", "C:\ParsecTemp\parsec+desktop.png")
 (New-Object System.Net.WebClient).DownloadFile("https://s3.amazonaws.com/parseccloud/image/white_ico_agc_icon.ico", "C:\ParsecTemp\white_ico_agc_icon.ico")
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/jamesstringerparsec/Cloud-GPU-Updater/master/GPUUpdaterTool.ps1", "$env:APPDATA\ParsecLoader\GPUUpdaterTool.ps1")
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/nathenv/Cloud-GPU-Updater/master/GPUUpdaterTool.ps1", "$env:APPDATA\ParsecLoader\GPUUpdaterTool.ps1")
 ProgressWriter -Status "Downloading Google Chrome" -PercentComplete $PercentComplete
 (New-Object System.Net.WebClient).DownloadFile("https://dl.google.com/tag/s/dl/chrome/install/googlechromestandaloneenterprise64.msi", "C:\ParsecTemp\Apps\googlechromestandaloneenterprise64.msi")
 
@@ -480,8 +480,8 @@ Start-Process -FilePath "C:\ParsecTemp\Apps\directx_jun2010_redist.exe" -Argumen
 Start-Process -FilePath "C:\ParsecTemp\DirectX\DXSETUP.EXE" -ArgumentList '/silent' -wait
 ProgressWriter -Status "Installing Direct Play" -PercentComplete $PercentComplete
 Install-WindowsFeature Direct-Play | Out-Null
-ProgressWriter -Status "Installing .net 3.5" -PercentComplete $PercentComplete
-Install-WindowsFeature Net-Framework-Core | Out-Null
+#ProgressWriter -Status "Installing .net 3.5" -PercentComplete $PercentComplete
+#Install-WindowsFeature Net-Framework-Core | Out-Null
 ProgressWriter -Status "Cleaning up" -PercentComplete $PercentComplete
 Remove-Item -Path C:\ParsecTemp\DirectX -force -Recurse 
 }
@@ -650,7 +650,7 @@ Set-Service -Name audiosrv -StartupType Automatic
 
 #Creates shortcut for the GPU Updater tool
 function gpu-update-shortcut {
-(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/jamesstringerparsec/Cloud-GPU-Updater/master/GPUUpdaterTool.ps1", "$ENV:Appdata\ParsecLoader\GPUUpdaterTool.ps1")
+(New-Object System.Net.WebClient).DownloadFile("https://raw.githubusercontent.com/nathenv/Cloud-GPU-Updater/master/GPUUpdaterTool.ps1", "$ENV:Appdata\ParsecLoader\GPUUpdaterTool.ps1")
 Unblock-File -Path "$ENV:Appdata\ParsecLoader\GPUUpdaterTool.ps1"
 ProgressWriter -Status "Creating GPU Updater icon on Desktop" -PercentComplete $PercentComplete
 $Shell = New-Object -ComObject ("WScript.Shell")
@@ -860,19 +860,11 @@ Write-Host -foregroundcolor red "
                     This tool supports:
 
                     OS:
-                    Server 2016
-                    Server 2019
+                    Windows 10 (Azure)
                     
                     CLOUD SKU:
-                    AWS G3.4xLarge    (Tesla M60)
-                    AWS G2.2xLarge    (GRID K520)
-                    AWS G4dn.xLarge   (Tesla T4 with vGaming driver)
                     Azure NV6         (Tesla M60)
-                    Paperspace P4000  (Quadro P4000)
-                    Paperspace P5000  (Quadro P5000)
-                    Google P100 VW    (Tesla P100 Virtual Workstation)
-                    Google P4  VW    (Tesla P4 Virtual Workstation)
-                    Google T4  VW    (Tesla T4 Virtual Workstation)
+                    
 
 "   
 PromptUserAutoLogon -DontPromptPasswordUpdateGPU:$DontPromptPasswordUpdateGPU
@@ -880,23 +872,23 @@ $ScripttaskList = @(
 "setupEnvironment";
 "addRegItems";
 "create-directories";
-"disable-iesecurity";
+#"disable-iesecurity";
 "download-resources";
-"install-windows-features";
-"set-update-policy";
+#"install-windows-features";
+#"set-update-policy";
 "force-close-apps";
-"disable-network-window";
-"disable-logout";
-"disable-lock";
+#"disable-network-window";
+#"disable-logout";
+#"disable-lock";
 "show-hidden-items";
 "show-file-extensions";
 "enhance-pointer-precision";
 "enable-mousekeys";
 "set-time";
-"set-wallpaper";
+#"set-wallpaper";
 "Create-AutoShutdown-Shortcut";
 "Create-One-Hour-Warning-Shortcut";
-"disable-server-manager";
+#"disable-server-manager";
 "Install-Gaming-Apps";
 "Server2019Controller";
 "gpu-update-shortcut";
