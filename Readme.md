@@ -36,7 +36,7 @@ Then fill in the details on the next page.
 4. Copy the below code and follow the instructions in the script - you'll see them in RED
 
 ```
-[Net.ServicePointManager]::SecurityProtocol = "tls13, tls12, tls11"  
+[Net.ServicePointManager]::SecurityProtocol = "tls12, tls11"  
 (New-Object System.Net.WebClient).DownloadFile("https://github.com/nathenv/Parsec-Cloud-Preparation-Tool/archive/master.zip","$ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool.zip")  
 New-Item -Path $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool -ItemType Directory  
 Expand-Archive $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool.Zip -DestinationPath $ENV:UserProfile\Downloads\Parsec-Cloud-Preparation-Tool  
